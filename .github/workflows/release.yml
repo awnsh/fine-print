@@ -1,0 +1,45 @@
+# Builds the extension zip and attaches it to a GitHub release whenever a
+# version tag is pushed:  git tag v0.2.0 && git push origin v0.2.0
+# Release notes come from that version's section in CHANGELOG.md.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run package
+
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          awk -v ver="## ${GITHUB_REF_NAME}" '
+            index($0, ver) == 1 { on = 1; next }
+            on && /^## / { exit }
+            on { print }
+          ' CHANGELOG.md > notes.md
+          test -s notes.md || echo "See CHANGELOG.md" > notes.md
+
+      - name: Create or update the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          zip="release/fine-print-${GITHUB_REF_NAME}.zip"
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$zip" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "$zip" --title "Fine Print ${GITHUB_REF_NAME}" --notes-file notes.md
+          fi

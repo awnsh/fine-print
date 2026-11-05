@@ -27,14 +27,33 @@
 
 ## Install
 
+**From a release (easiest).** Download `fine-print-vX.Y.Z.zip` from the [latest release](https://github.com/awnsh/fine-print/releases/latest) and unzip it. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and choose the unzipped folder.
+
+**From source.**
+
 ```bash
 npm install
 npm run build
 ```
 
-Then open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and pick the `dist/` folder. The settings page opens on first install. To use the on-device AI, click **Download model** there (a one-time download of about 2 GB, handled by Chrome).
+Then load the `dist/` folder the same way. The settings page opens on first install. To use the on-device AI, click **Download model** there (a one-time download of about 2 GB, handled by Chrome).
 
 `npm run dev` rebuilds on save; click the reload icon on the extension in `chrome://extensions` afterwards.
+
+## Releasing
+
+```bash
+npm run package
+```
+
+builds the extension and writes `release/fine-print-v<version>.zip`, with `manifest.json` at the root, ready for **Load unpacked** or the Chrome Web Store. The version in `package.json` and `public/manifest.json` must match.
+
+To publish a release: bump both versions, add a section to [CHANGELOG.md](CHANGELOG.md), commit, then push a tag. The [release workflow](.github/workflows/release.yml) builds the zip and attaches it to a GitHub release, using that version's CHANGELOG section as the notes.
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
 
 ## How it works
 
@@ -86,6 +105,8 @@ fine-print/
 │  ├─ popup/           the main screen: this page + history
 │  ├─ options/         background reading, on-device AI, tone, saved data
 │  └─ lib/             rules, AI prompt, storage, icons, shared types
+├─ scripts/package.mjs  zips dist/ into release/ (no dependencies)
+├─ .github/workflows/  release workflow: tag push builds and attaches the zip
 ├─ test/               fake-chrome harness, test server, fixture downloader
 ├─ vite.config.ts             popup / options / offscreen pages
 ├─ vite.background.config.ts  service worker as one file

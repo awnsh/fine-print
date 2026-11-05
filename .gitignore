@@ -4,3 +4,4 @@ test/dist
 # Real sites' Terms pages: downloaded locally with `npm run test:fixtures`, not redistributed.
 test/fixtures/*.html
 !test/fixtures/signup.html
+release
