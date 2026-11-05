@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fine Print Settings</title>
+    <link rel="stylesheet" href="../ui.css" />
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main>
+      <header class="intro">
+        <img class="brand-logo" alt="" />
+        <div>
+          <h1>Settings</h1>
+          <p class="lede">Fine Print reads Terms of Service and privacy policies for you. It’s free, needs no account, and nothing you read leaves your computer.</p>
+        </div>
+      </header>
+
+      <section class="group" aria-labelledby="h-general">
+        <h2 id="h-general">General</h2>
+        <div class="card">
+          <div class="row">
+            <div class="text">
+              <label for="auto-analyze" class="title">Read policy pages in the background</label>
+              <p class="desc">Nothing pops up on the page. The toolbar icon shows how many issues were found, and you click it to see them.</p>
+            </div>
+            <input id="auto-analyze" class="switch" type="checkbox" role="switch" />
+          </div>
+          <div class="row">
+            <div class="text">
+              <label for="use-ai" class="title">On-device AI</label>
+              <p class="desc">Use Chrome’s free built-in model (Gemini Nano) for sharper summaries. It runs only on this computer.</p>
+              <p class="status" id="nano-status" role="status"></p>
+              <button class="btn secondary sm" id="nano-download" type="button" hidden></button>
+            </div>
+            <input id="use-ai" class="switch" type="checkbox" role="switch" />
+          </div>
+        </div>
+      </section>
+
+      <section class="group" aria-labelledby="h-tone">
+        <h2 id="h-tone">Summary tone</h2>
+        <div class="card">
+          <div class="row stack">
+            <div class="segmented" role="radiogroup" aria-labelledby="h-tone" id="tone"></div>
+            <p class="sample" id="tone-sample" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="group" aria-labelledby="h-data">
+        <h2 id="h-data">Data</h2>
+        <div class="card">
+          <div class="row">
+            <div class="text">
+              <span class="title">Saved summaries</span>
+              <p class="desc" id="cache-status">Pages you’ve read are remembered so they open instantly next time.</p>
+            </div>
+            <button class="btn secondary sm" id="clear-cache" type="button">Clear</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

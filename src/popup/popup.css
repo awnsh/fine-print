@@ -1,0 +1,127 @@
+body { width: 400px; }
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px 12px 16px;
+}
+.top img { width: 24px; height: 24px; border-radius: 6px; display: block; }
+.top .name { margin: 0 auto 0 0; font-weight: 600; font-size: 15px; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 16px 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--chip);
+}
+.tab {
+  all: unset;
+  flex: 1;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--secondary);
+  cursor: pointer;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { background: var(--bg); color: var(--text); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--border); }
+.tab:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+
+.panel { padding: 14px 16px 16px; max-height: 500px; overflow: auto; }
+.panel[hidden] { display: none; }
+
+/* ---- current page ---- */
+.meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.meta .site { font-size: 12.5px; color: var(--tertiary); margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55%; }
+
+.headline {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.flags { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.flag { padding: 12px 12px 10px; border: 1px solid var(--border); border-radius: 14px; }
+.flag-head { display: flex; align-items: baseline; gap: 10px; }
+.num { flex: none; width: 18px; font-size: 12px; font-weight: 500; color: var(--tertiary); font-variant-numeric: tabular-nums; }
+.flag.w3 .num { color: var(--high); }
+.label { font-weight: 600; }
+.quote { margin: 6px 0 10px 28px; font-size: 13px; line-height: 1.55; color: var(--secondary); }
+.flag .actions { display: flex; align-items: center; gap: 8px; margin-left: 28px; }
+.flag .note { font-size: 12px; color: var(--tertiary); }
+
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--tertiary);
+}
+.engine { display: inline-flex; align-items: center; gap: 6px; }
+.engine .icon svg { width: 14px; height: 14px; }
+.foot .text-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; }
+.foot .text-btn .icon svg { width: 14px; height: 14px; }
+
+.tip {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 12.5px;
+  color: var(--secondary);
+}
+.tip .icon svg { width: 16px; height: 16px; margin-top: 1px; }
+
+/* ---- empty / loading ---- */
+.empty { padding: 18px 4px 8px; text-align: center; }
+.empty .glyph {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--secondary);
+}
+.empty .glyph svg { width: 22px; height: 22px; }
+.empty h2 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.empty p { margin: 0 auto 16px; max-width: 30ch; color: var(--secondary); font-size: 13.5px; }
+
+.loading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 36px 0; color: var(--secondary); }
+.pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--text); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(0.7); opacity: 0.5; } 50% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+
+/* ---- history ---- */
+.history { list-style: none; margin: 0 -8px; padding: 0; }
+.history button {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.history button:hover { background: var(--hover); }
+.history button:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.history .dom { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history .when { font-size: 12px; color: var(--tertiary); font-variant-numeric: tabular-nums; }
+.history .hl { grid-column: 2 / 4; font-size: 12.5px; color: var(--secondary); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.history-foot { display: flex; justify-content: flex-end; margin-top: 8px; }

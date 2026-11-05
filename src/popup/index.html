@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fine Print</title>
+    <link rel="stylesheet" href="../ui.css" />
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <header class="top">
+      <img class="brand-logo" alt="" />
+      <p class="name">Fine Print</p>
+      <button class="icon-btn" id="settings" title="Settings" aria-label="Settings"></button>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tab-page" aria-controls="panel-page" aria-selected="true">This page</button>
+      <button class="tab" role="tab" id="tab-history" aria-controls="panel-history" aria-selected="false">History</button>
+    </nav>
+
+    <main>
+      <section class="panel" id="panel-page" role="tabpanel" aria-labelledby="tab-page" aria-live="polite"></section>
+      <section class="panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden>
+        <ol class="history" id="history"></ol>
+        <div class="history-foot"><button class="text-btn" id="clear-history" hidden>Clear history</button></div>
+      </section>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

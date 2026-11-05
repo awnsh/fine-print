@@ -1,0 +1,19 @@
+{
+  "name": "fine-print",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Free Chrome extension that reads Terms of Service and privacy policies, sums up the worst part in one sentence, and shows you where it says so.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && vite build && vite build -c vite.background.config.ts && vite build -c vite.content.config.ts",
+    "dev": "vite build --watch & vite build -c vite.background.config.ts --watch & vite build -c vite.content.config.ts --watch",
+    "typecheck": "tsc --noEmit",
+    "test:serve": "npm run build && vite build -c vite.harness.config.ts && node test/serve.mjs",
+    "test:fixtures": "node test/fetch-fixtures.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.287",
+    "typescript": "5.6.3",
+    "vite": "5.4.11"
+  }
+}
